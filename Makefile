@@ -6,35 +6,41 @@
 #    By: yberries <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/03 05:28:15 by yberries          #+#    #+#              #
-#    Updated: 2020/08/03 06:57:54 by yberries         ###   ########.fr        #
+#    Updated: 2020/08/04 23:54:33 by yberries         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = yberries.filler
 
+LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_DIR = libft/
 LIBFT_LNK = -L $(LIBFT_DIR) -lft
-LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_DIR = src/
-SRC = $(addprefix $(SRC_DIR)/, $(SRCS))
-SRCS = main.c
+SRC = $(addprefix $(SRC_DIR), $(SRCS))
+SRCS = filler.c \
+       get_board.c \
+       get_piece.c \
+       get_res.c
 
 OBJ_DIR = obj/
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+OBJS = $(patsubst %.c, %.o, $(SRCS))
+OBJ = $(addprefix $(OBJ_DIR), $(OBJS))
 
-HDR_DIR = include/
 HDRS = filler.h
-INCLUDES = $(addprefix $(HDR_DIR), $(HDRS))
+HDR_DIR = include/
+HDR = $(addprefix $(HDR_DIR), $(HDRS))
 
-FLAGS = -Wall -Wextra -Werror
+INCLUDES = -I $(HDR_DIR) -I $(LIBFT_DIR)
+
+FLAGS = -Wall #dont forget
 
 .PHONY: clean all re fclean
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT) $(INCLUDES)
-	gcc $(FLAGS) -o $@ $(OBJ) $(LIBFT_LNK)
+$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
+	gcc $(FLAGS) -o $(NAME) $(INCLUDES) $(OBJ) $(LIBFT_LNK)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -42,8 +48,8 @@ $(OBJ_DIR):
 $(LIBFT):
 	make -sC $(LIBFT_DIR)
 
-$(OBJ): $(SRC) $(INCLUDES)
-	gcc $(FLAGS) -I $(HDR_DIR) -I $(LIBFT_DIR) -o $@ -c $<
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HDR)
+	gcc $(FLAGS) -c $(INCLUDES) $< -o $@
 
 clean:
 	make -sC $(LIBFT_DIR) clean
