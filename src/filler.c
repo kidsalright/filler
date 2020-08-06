@@ -6,12 +6,26 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 05:25:17 by yberries          #+#    #+#             */
-/*   Updated: 2020/08/05 16:12:36 by yberries         ###   ########.fr       */
+/*   Updated: 2020/08/06 20:38:22 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include <stdio.h>
+
+static void	free_data(t_board *map, t_piece *piece)
+{
+	int	i;
+
+	i = -1;
+	while (++i < map->height)
+		ft_strdel(&map->map[i]);
+	ft_memdel((void **)(&map->map));
+	i = 0;
+	while (i < piece->height)
+		ft_strdel(&piece->p[i++]);
+	ft_memdel((void **)(&piece->p));
+}
 
 static void	find_player(t_board *map)
 {
@@ -25,15 +39,9 @@ static void	find_player(t_board *map)
 				ft_strstr(line, "yberries.filler"))
 		{
 			if (ft_strstr(line, "p1"))
-			{
-				ft_strdel(&line);
 				map->plr = 'O';
-			}
 			else if (ft_strstr(line, "p2"))
-			{
-				ft_strdel(&line);
 				map->plr = 'X';
-			}
 		}
 		ft_strdel(&line);
 		if (map->plr)
@@ -59,10 +67,10 @@ int	main(void)
 	find_player(&map);
 	while (1)
 	{
-		get_board(&map);
-	//	get_piece(&piece);
-	//	get_res(&map, &piece, &res);
-	//	output_res(res);
+		input_parse(&map, &piece);
+		get_res(&map, &piece, &res);
+		output_res(res);
+		free_data(&map, &piece);
 	}
 	return (0);
 }
