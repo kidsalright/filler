@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 05:25:17 by yberries          #+#    #+#             */
-/*   Updated: 2020/08/08 15:07:46 by yberries         ###   ########.fr       */
+/*   Updated: 2020/08/08 16:15:32 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	output_res(t_res res)
 	write(1, "\n", 1);
 }
 
-int		main(void)
+int			main(void)
 {
 	t_piece	piece;
 	t_board	map;
