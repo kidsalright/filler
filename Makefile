@@ -6,7 +6,7 @@
 #    By: yberries <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/03 05:28:15 by yberries          #+#    #+#              #
-#    Updated: 2020/08/06 17:26:13 by yberries         ###   ########.fr        #
+#    Updated: 2020/08/08 15:24:34 by yberries         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ SRC_DIR = src/
 SRC = $(addprefix $(SRC_DIR), $(SRCS))
 SRCS = filler.c \
        get_input.c \
-       get_some.c \
-       get_res.c
+       map_handler.c \
+       piece_placing.c
 
 OBJ_DIR = obj/
 OBJS = $(patsubst %.c, %.o, $(SRCS))
@@ -33,7 +33,7 @@ HDR = $(addprefix $(HDR_DIR), $(HDRS))
 
 INCLUDES = -I $(HDR_DIR) -I $(LIBFT_DIR)
 
-FLAGS = -Wall #dont forget
+FLAGS = -Wall -Wextra -Werror
 
 .PHONY: clean all re fclean
 

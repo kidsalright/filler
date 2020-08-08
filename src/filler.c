@@ -6,30 +6,29 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 05:25:17 by yberries          #+#    #+#             */
-/*   Updated: 2020/08/08 07:09:17 by yberries         ###   ########.fr       */
+/*   Updated: 2020/08/08 15:07:46 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-#include <stdio.h>
 
 static void	free_data(t_board *map, t_piece *piece)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (++i < map->height)
 		ft_strdel(&map->map[i]);
 	ft_memdel((void **)(&map->map));
-	i = 0;
-	while (i < piece->height)
-		ft_strdel(&piece->p[i++]);
+	i = -1;
+	while (++i < piece->height)
+		ft_strdel(&piece->p[i]);
 	ft_memdel((void **)(&piece->p));
 }
 
 static int	find_player(t_board *map)
 {
-	char	*line;
+	char *line;
 
 	line = NULL;
 	map->plr = 0;
@@ -58,17 +57,17 @@ static void	output_res(t_res res)
 	write(1, "\n", 1);
 }
 
-int	main(void)
+int		main(void)
 {
-	t_piece		piece;
-	t_board		map;
-	t_res		res;
+	t_piece	piece;
+	t_board	map;
+	t_res	res;
 
 	if (find_player(&map))
 	{
 		while (input_parse(&map, &piece))
 		{
-			get_res(&map, &piece, &res);
+			start_heat(&map, &piece, &res);
 			output_res(res);
 			free_data(&map, &piece);
 		}
