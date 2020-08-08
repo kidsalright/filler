@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 05:25:17 by yberries          #+#    #+#             */
-/*   Updated: 2020/08/06 20:38:22 by yberries         ###   ########.fr       */
+/*   Updated: 2020/08/08 07:09:17 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	free_data(t_board *map, t_piece *piece)
 	ft_memdel((void **)(&piece->p));
 }
 
-static void	find_player(t_board *map)
+static int	find_player(t_board *map)
 {
 	char	*line;
 
@@ -42,12 +42,12 @@ static void	find_player(t_board *map)
 				map->plr = 'O';
 			else if (ft_strstr(line, "p2"))
 				map->plr = 'X';
+			ft_strdel(&line);
+			return (1);
 		}
 		ft_strdel(&line);
-		if (map->plr)
-			break;
 	}
-	map->enm = (map->plr = 'O') ? 'X' : 'O';
+	return (0);
 }
 
 static void	output_res(t_res res)
@@ -64,13 +64,14 @@ int	main(void)
 	t_board		map;
 	t_res		res;
 
-	find_player(&map);
-	while (1)
+	if (find_player(&map))
 	{
-		input_parse(&map, &piece);
-		get_res(&map, &piece, &res);
-		output_res(res);
-		free_data(&map, &piece);
+		while (input_parse(&map, &piece))
+		{
+			get_res(&map, &piece, &res);
+			output_res(res);
+			free_data(&map, &piece);
+		}
 	}
 	return (0);
 }

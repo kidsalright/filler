@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 16:42:03 by yberries          #+#    #+#             */
-/*   Updated: 2020/08/06 20:26:07 by yberries         ###   ########.fr       */
+/*   Updated: 2020/08/08 06:55:33 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	board_parse(t_board *map, t_piece *piece)
 	}
 }
 
-void		input_parse(t_board *map, t_piece *piece)
+int		input_parse(t_board *map, t_piece *piece)
 {
 	char	*line;
 
@@ -74,10 +74,11 @@ void		input_parse(t_board *map, t_piece *piece)
 			map->height = ft_atoi(ft_strchr(line, ' '));
 			map->width = ft_atoi(ft_strrchr(line, ' '));
 			ft_strdel(&line);
-			break ;
+			board_parse(map, piece);
+			piece_parse(piece);
+			return (1);
 		}
 		ft_strdel(&line);
 	}
-	board_parse(map, piece);
-	piece_parse(piece);
+	return (0);
 }

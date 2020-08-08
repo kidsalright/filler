@@ -1,20 +1,48 @@
-if [ $1 = 3 ]; then
-map=3
+if [ $1 = 01 ]; then
+map=0
 p=1
 b=2
 cd vm
-./filler_vm -f maps/map0$map -p2 champions/abanlin.filler -p1 ../yberries.filler
+./filler_vm -f maps/map0$map -p$b champions/abanlin.filler -p$p ../yberries.filler
 exit
 fi
-echo "Write map number [0, 1, 2 , ... ]"
-read map
-echo "Choose to be player 1 or 2"
-read p
-if [ $p = 1 ]; then
-b=2
-else
+if [ $1 = 02 ]; then
+map=0
+p=2
 b=1
-fi
 cd vm
 ./filler_vm -f maps/map0$map -p$b champions/abanlin.filler -p$p ../yberries.filler
-cd ..
+exit
+fi
+if [ $1 = 11 ]; then
+map=1
+p=1
+b=2
+cd vm
+./filler_vm -f maps/map0$map -p$b champions/abanlin.filler -p$p ../yberries.filler
+exit
+fi
+if [ $1 = 12 ]; then
+map=1
+p=2
+b=1
+cd vm
+./filler_vm -f maps/map0$map -p$b champions/abanlin.filler -p$p ../yberries.filler
+exit
+fi
+if [ $1 = 21 ]; then
+map=2
+p=1
+b=2
+cd vm
+./filler_vm -f maps/map0$map -p$b champions/abanlin.filler -p$p ../yberries.filler
+exit
+fi
+if [ $1 = 22 ]; then
+map=2
+p=2
+b=1
+cd vm
+./filler_vm -f maps/map0$map -p$b champions/abanlin.filler -p$p ../yberries.filler
+exit
+fi
