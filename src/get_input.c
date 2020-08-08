@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 16:42:03 by yberries          #+#    #+#             */
-/*   Updated: 2020/08/08 15:25:29 by yberries         ###   ########.fr       */
+/*   Updated: 2020/08/08 16:16:23 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	piece_parse(t_piece *piece)
 {
 	char	*line;
-	int	i;
+	int		i;
 
 	line = NULL;
 	while (get_next_line(0, &line))
@@ -43,8 +43,8 @@ static void	board_parse(t_board *m)
 {
 	char	*line;
 	char	*skip;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	line = NULL;
 	i = -1;
@@ -68,7 +68,7 @@ static void	board_parse(t_board *m)
 	}
 }
 
-int		input_parse(t_board *map, t_piece *piece)
+int			input_parse(t_board *map, t_piece *piece)
 {
 	char	*line;
 
