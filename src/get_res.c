@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 22:30:46 by yberries          #+#    #+#             */
-/*   Updated: 2020/08/08 07:43:19 by yberries         ###   ########.fr       */
+/*   Updated: 2020/08/08 07:45:58 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,6 @@ void		get_res(t_board *map, t_piece *piece, t_res *res)
 	hmap = init_heat(map);
 	calc_heat(map, hmap);
 	print_heat(map, hmap);
+	res->x = 0;
+	res->y = 0;
 }
