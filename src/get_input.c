@@ -6,7 +6,7 @@
 /*   By: yberries <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 16:42:03 by yberries          #+#    #+#             */
-/*   Updated: 2020/08/08 16:16:23 by fhelena          ###   ########.fr       */
+/*   Updated: 2020/08/09 12:50:27 by yberries         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ static void	piece_parse(t_piece *piece)
 	piece->p = (char **)malloc(sizeof(char *) * piece->height);
 	while (++i < piece->height && get_next_line(0, &line))
 	{
-		piece->p[i] = ft_strnew(piece->width);
-		piece->p[i] = ft_strncpy(piece->p[i], line, piece->width);
+		piece->p[i] = ft_strdup(line);
 		ft_strdel(&line);
 	}
 }
